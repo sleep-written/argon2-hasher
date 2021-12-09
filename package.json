@@ -7,6 +7,9 @@
     "test": "mocha --require ts-node/register ./src/**/*.test.ts",
     "prepare": "tsc"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "argon2",
     "json",
