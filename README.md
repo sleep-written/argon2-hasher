@@ -74,3 +74,30 @@ async function program(objA: any, objB: any): Promise<void> {
     }
 }
 ```
+
+## Save your configuration
+
+If you want to save the configuration of your current instance, now you have the `HasherFile` class for that purpose:
+
+```ts
+import { JsonHasher, HasherFile } from 'argon2-json-hasher';
+
+// Create an instance to manage your configuration file
+const hasherFile = new HasherFile('./secret.argon2');
+
+// An async function with the program
+async function program(): Promise<void> {
+    // Here's your JsonHasher instance
+    const originalHasher = new JsonHasher(32, {
+        hashLength: 256,
+        memoryCost: 3660
+    });
+
+    // To save your current configuration:
+    await hasherFile.save(originalHasher);
+
+    // To load the configuration:
+    const theSameHasher = await hasherFile.load();
+}
+
+```

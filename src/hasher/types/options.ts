@@ -27,7 +27,7 @@ export interface Options {
     /**
      * The amount of threads to compute the hash on. Each thread has a memory pool
      * with `memoryCost` size. Note that changing it also changes the resulting hash.
-     * The default value is 1, meaning a single thread is used.
+     * The default value is `1`, meaning a single thread is used.
      */
     parallelism?: number;
 
