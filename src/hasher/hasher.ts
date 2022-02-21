@@ -35,9 +35,10 @@ export class Hasher {
         };
     }
 
-    static verify(digested: string, input: string | Buffer): Promise<boolean>;
-    static verify(hashed: Hashed, input: string | Buffer): Promise<boolean>;
-    static verify(arg: string | Hashed, input: string | Buffer): Promise<boolean> {
+    static verify(digested: string, input: any): Promise<boolean>;
+    static verify(hashed: Hashed, input: any): Promise<boolean>;
+    static verify(arg: string | Hashed, input: any): Promise<boolean> {
+        // Process the hashed object or the digest
         let digested: string;
         if (arg instanceof HasherResponse) {
             digested = arg.digest();
@@ -47,7 +48,19 @@ export class Hasher {
             throw new InvalidHashParamError();
         }
 
-        return verify(digested, input);
+        // Process the input parameter
+        let rawInput: Buffer;
+        if (Buffer.isBuffer(input)) {
+            rawInput = input;
+        } else if (typeof input === 'string') {
+            rawInput = Buffer.from(input, 'utf-8');
+        } else {
+            const str = stringify(input);
+            rawInput = Buffer.from(str, 'utf-8');
+        }
+
+        // Execute the real verify method
+        return verify(digested, rawInput);
     }
 
     async compare(a: any, b: any): Promise<boolean> {
@@ -60,12 +73,15 @@ export class Hasher {
         return Buffer.compare(hashedA.hash, hashedB.hash) === 0;
     }
 
-    async hash(input: string | Buffer): Promise<Hashed> {
+    async hash(input: any): Promise<Hashed> {
         let value: Buffer;
-        if (typeof input === 'string') {
+        if (Buffer.isBuffer(input)) {
+            value = input;
+        } else if (typeof input === 'string') {
             value = Buffer.from(input, 'utf-8');
         } else {
-            value = input;
+            const str = stringify(input);
+            value = Buffer.from(str, 'utf-8');
         }
 
         const byte = await hash(value, {
@@ -78,8 +94,9 @@ export class Hasher {
         return new HasherResponse(byte, this._salt, this._options);
     }
 
-    verify(hash: Buffer, input: string | Buffer): Promise<boolean> {
+    verify(hash: Buffer, input: any): Promise<boolean> {
         const hashed = new HasherResponse(hash, this._salt, this._options);
-        return verify(hashed.digest(), input);
+        const digest = hashed.digest();
+        return verify(digest, input);
     }
 }

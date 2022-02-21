@@ -1,7 +1,8 @@
-export { HasherFile } from './hasher-file';
-export { UnsupportedTypeError } from './get-type';
+export * from './hasher';
+export * from './hasher-file';
 
 export {
-    Hasher, Hashed, Options,
-    Variants, InvalidHashParamError
-} from './hasher';
+    InputTypes,
+    getInputType,
+    UnsupportedTypeError
+} from './stringify';

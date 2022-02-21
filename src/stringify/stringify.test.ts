@@ -34,12 +34,12 @@ describe('Testing "./stringify"', () => {
     describe('Convert "bigint":', () => {
         it('11n', () => {
             const res = stringify(11n);
-            assert.strictEqual(res, '{"class": "BigInt", "value": "11n"}');
+            assert.strictEqual(res, '{"type": "BigInt", "value": "11n"}');
         });
 
         it('-88n', () => {
             const res = stringify(-88n);
-            assert.strictEqual(res, '{"class": "BigInt", "value": "-88n"}');
+            assert.strictEqual(res, '{"type": "BigInt", "value": "-88n"}');
         });
     });
 
@@ -81,7 +81,7 @@ describe('Testing "./stringify"', () => {
 
             const res = stringify(obj);
             assert.strictEqual(res,
-                '{"text": "jajaja", "value": {"class": '
+                '{"text": "jajaja", "value": {"type": '
             +   '"BigInt", "value": "555n"}}'
             );
         });

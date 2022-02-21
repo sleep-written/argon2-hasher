@@ -1,7 +1,7 @@
-import { Type } from './type';
+import { InputTypes } from './input-types';
 import { UnsupportedTypeError } from './unsupported-type-error';
 
-export function getType(input: any): Type {
+export function getInputType(input: any): InputTypes {
     const typeofInput = typeof input
     switch (typeofInput) {
         case 'undefined':

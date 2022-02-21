@@ -1,6 +1,6 @@
 {
   "name": "argon2-hasher",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This is a wrapper for argon2 npm module, for making mass hashing generation and comparing objects.",
   "main": "dist/index.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "recursive"
   ],
   "author": "sleep-written",
+  "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.3.0",
     "@types/mocha": "^9.1.0",

@@ -2,8 +2,14 @@ import { access, readFile, writeFile } from 'fs/promises';
 import { resolve } from 'path';
 
 import { Hasher, Options, Variants } from '../hasher';
+import { FileNotFoundError } from './file-not-found-error';
 
 export class HasherFile {
+    static load(path: string): Promise<Hasher> {
+        const file = new HasherFile(path);
+        return file.load();
+    }
+
     private _path: string;
     get path(): string {
         return this._path;
@@ -38,8 +44,12 @@ export class HasherFile {
         try {
             await access(this._path);
             return true;
-        } catch {
-            return false;
+        } catch (err: any) {
+            if (err.code === 'ENOENT') {
+                return false;
+            } else {
+                throw err;
+            }
         }
     }
 
@@ -64,15 +74,24 @@ export class HasherFile {
     }
 
     async load(): Promise<Hasher> {
-        const byte = await readFile(this._path);
-        const opts: Partial<Options> = {};
-        opts.type        = this._bufferToNumber(byte,           0, 1);
-        opts.hashLength  = this._bufferToNumber(byte, (8 * 0) + 1, 8);
-        opts.memoryCost  = this._bufferToNumber(byte, (8 * 1) + 1, 8);
-        opts.parallelism = this._bufferToNumber(byte, (8 * 2) + 1, 8);
-        opts.timeCost    = this._bufferToNumber(byte, (8 * 3) + 1, 8);
+        try {
+            const byte = await readFile(this._path);
+            const opts: Partial<Options> = {};
+            opts.type        = this._bufferToNumber(byte,           0, 1);
+            opts.hashLength  = this._bufferToNumber(byte, (8 * 0) + 1, 8);
+            opts.memoryCost  = this._bufferToNumber(byte, (8 * 1) + 1, 8);
+            opts.parallelism = this._bufferToNumber(byte, (8 * 2) + 1, 8);
+            opts.timeCost    = this._bufferToNumber(byte, (8 * 3) + 1, 8);
+    
+            const salt = byte.slice((8 * 4) + 1);
+            return new Hasher(salt, opts);
 
-        const salt = byte.slice((8 * 4) + 1);
-        return new Hasher(salt, opts);
+        } catch (err: any) {
+            if (err.code === 'ENOENT') {
+                throw new FileNotFoundError(this._path);
+            } else {
+                throw err;
+            }
+        }
     }
 }

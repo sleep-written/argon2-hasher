@@ -1,7 +1,7 @@
-import { getType } from '../get-type';
+import { getInputType } from './get-type';
 
 export function stringify(input: any): string {
-    switch (getType(input)) {
+    switch (getInputType(input)) {
         case 'undefined':
         case 'boolean':
         case 'number':
@@ -11,7 +11,7 @@ export function stringify(input: any): string {
 
         case 'bigint':
             return stringify({
-                class: 'BigInt',
+                type: 'BigInt',
                 value: input.toString() + 'n'
             });
 
