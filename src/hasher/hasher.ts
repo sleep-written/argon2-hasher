@@ -3,7 +3,7 @@ import { randomBytes } from 'crypto';
 
 import { HasherResponse } from './hasher-response';
 import { InvalidHashParamError } from './invalid-hash-param-error';
-import { Options, Hashed } from './types';
+import { Options, Hashed, Variants } from './interfaces';
 
 export class Hasher {
     private _options: Options;
@@ -16,17 +16,22 @@ export class Hasher {
         return this._salt;
     }
 
-
-    constructor(salt: Buffer, options?: Options);
-    constructor(saltLength: number, options?: Options)
-    constructor(arg: number | Buffer, options?: Options) {
+    constructor(salt: Buffer, options?: Partial<Options>);
+    constructor(saltLength: number, options?: Partial<Options>)
+    constructor(arg: number | Buffer, options?: Partial<Options>) {
         if (typeof arg === 'number') {
             this._salt = randomBytes(arg);
         } else {
             this._salt = arg;
         }
 
-        this._options = { ...options };
+        this._options = {
+            hashLength: options?.hashLength ?? 32,
+            memoryCost: options?.memoryCost ?? 4096,
+            parallelism: options?.parallelism ?? 1,
+            timeCost: options?.timeCost ?? 3,
+            type: options?.type ?? Variants.Argon2i
+        };
     }
 
     static verify(digested: string, input: string | Buffer): Promise<boolean>;
@@ -59,7 +64,7 @@ export class Hasher {
             raw: true
         });
 
-        return new HasherResponse(byte, this._salt);
+        return new HasherResponse(byte, this._salt, this._options);
     }
 
     verify(hash: Buffer, input: string | Buffer): Promise<boolean> {

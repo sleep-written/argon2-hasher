@@ -65,7 +65,7 @@ export class HasherFile {
 
     async load(): Promise<JsonHasher> {
         const byte = await readFile(this._path);
-        const opts: Options = {};
+        const opts: Partial<Options> = {};
         opts.type        = this._bufferToNumber(byte,           0, 1);
         opts.hashLength  = this._bufferToNumber(byte, (8 * 0) + 1, 8);
         opts.memoryCost  = this._bufferToNumber(byte, (8 * 1) + 1, 8);

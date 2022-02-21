@@ -12,9 +12,9 @@ export class JsonHasher {
         return this._hasher.salt;
     }
 
-    constructor(salt: Buffer, options?: Options);
-    constructor(saltLength: number, options?: Options);
-    constructor(arg: number | Buffer, options?: Options) {
+    constructor(salt: Buffer, options?: Partial<Options>);
+    constructor(saltLength: number, options?: Partial<Options>);
+    constructor(arg: number | Buffer, options?: Partial<Options>) {
         this._hasher = new Hasher(arg as any, options);
     }
 

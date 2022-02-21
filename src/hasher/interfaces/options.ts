@@ -5,7 +5,7 @@ export interface Options {
      * The hash length is the length of the hash function output in bytes.
      * The default value is `32`, which produces raw hashes of 32 bytes.
      */
-    hashLength?: number;
+    hashLength: number;
 
     /**
      * The time cost is the amount of passes (iterations) used by the
@@ -13,7 +13,7 @@ export interface Options {
      * required to compute.
      * The default value is `3`.
      */
-    timeCost?: number;
+    timeCost: number;
 
     /**
      * The amount of memory to be used by the hash function, in KiB. Each thread
@@ -22,14 +22,14 @@ export interface Options {
      * usage will cause starvation and thrashing if your system memory gets full.
      * The default value is `4096`, meaning a pool of 4 MiB per thread.
      */
-    memoryCost?: number;
+    memoryCost: number;
 
     /**
      * The amount of threads to compute the hash on. Each thread has a memory pool
      * with `memoryCost` size. Note that changing it also changes the resulting hash.
      * The default value is `1`, meaning a single thread is used.
      */
-    parallelism?: number;
+    parallelism: number;
 
     /**
      * The variant of the hash function. Argon2 has several variants with different aims:
@@ -42,5 +42,5 @@ export interface Options {
      * 
      * The default is `Argon2i`.
      */
-    type?:  Variants;
+    type:  Variants;
 }

@@ -1,5 +1,5 @@
-import { Options, Variants } from './types';
-import { Hashed } from './types/hashed';
+import { Options, Variants } from './interfaces';
+import { Hashed } from './interfaces/hashed';
 
 export class HasherResponse implements Hashed {
     private _options: Options;
@@ -17,7 +17,7 @@ export class HasherResponse implements Hashed {
         return this._salt;
     }
 
-    constructor(hash: Buffer, salt: Buffer, options?: Options) {
+    constructor(hash: Buffer, salt: Buffer, options: Options) {
         this._hash = hash;
         this._salt = salt;
         this._options = { ...options };
