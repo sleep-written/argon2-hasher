@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'fs/promises';
+import { access, readFile, writeFile } from 'fs/promises';
 import { resolve } from 'path';
 import { JsonHasher, Variants } from '..';
 import { Options } from '../hasher';
@@ -32,6 +32,15 @@ export class HasherFile {
             .toString('hex');
 
         return parseInt(hex, 16);
+    }
+
+    async exist(): Promise<boolean> {
+        try {
+            await access(this._path);
+            return true;
+        } catch {
+            return false;
+        }
     }
 
     async save(hasher: JsonHasher): Promise<void> {

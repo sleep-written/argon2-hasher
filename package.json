@@ -1,11 +1,11 @@
 {
   "name": "argon2-json-hasher",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generate hashes from JSON objects using argon2 implementation.",
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha --require ts-node/register ./src/**/*.test.ts",
-    "prepare": "tsc"
+    "prepare": "rm -rf ./dist && tsc"
   },
   "files": [
     "dist"
