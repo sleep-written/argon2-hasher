@@ -1,9 +1,10 @@
 import { hash, verify } from 'argon2';
 import { randomBytes } from 'crypto';
 
-import { HasherResponse } from './hasher-response';
-import { InvalidHashParamError } from './invalid-hash-param-error';
 import { Options, Hashed, Variants } from './interfaces';
+import { InvalidHashParamError } from './invalid-hash-param-error';
+import { HasherResponse } from './hasher-response';
+import { stringify } from '../stringify';
 
 export class Hasher {
     private _options: Options;
@@ -47,6 +48,16 @@ export class Hasher {
         }
 
         return verify(digested, input);
+    }
+
+    async compare(a: any, b: any): Promise<boolean> {
+        const strA = stringify(a);
+        const strB = stringify(b);
+
+        const hashedA = await this.hash(strA);
+        const hashedB = await this.hash(strB);
+
+        return Buffer.compare(hashedA.hash, hashedB.hash) === 0;
     }
 
     async hash(input: string | Buffer): Promise<Hashed> {

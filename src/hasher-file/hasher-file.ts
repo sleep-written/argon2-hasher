@@ -1,7 +1,7 @@
 import { access, readFile, writeFile } from 'fs/promises';
 import { resolve } from 'path';
-import { JsonHasher, Variants } from '..';
-import { Options } from '../hasher';
+
+import { Hasher, Options, Variants } from '../hasher';
 
 export class HasherFile {
     private _path: string;
@@ -43,7 +43,7 @@ export class HasherFile {
         }
     }
 
-    async save(hasher: JsonHasher): Promise<void> {
+    async save(hasher: Hasher): Promise<void> {
         // Get the options
         const opt = hasher.options;
 
@@ -63,7 +63,7 @@ export class HasherFile {
         return writeFile(this._path, byte);
     }
 
-    async load(): Promise<JsonHasher> {
+    async load(): Promise<Hasher> {
         const byte = await readFile(this._path);
         const opts: Partial<Options> = {};
         opts.type        = this._bufferToNumber(byte,           0, 1);
@@ -73,6 +73,6 @@ export class HasherFile {
         opts.timeCost    = this._bufferToNumber(byte, (8 * 3) + 1, 8);
 
         const salt = byte.slice((8 * 4) + 1);
-        return new JsonHasher(salt, opts);
+        return new Hasher(salt, opts);
     }
 }

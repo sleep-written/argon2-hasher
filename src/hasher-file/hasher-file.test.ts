@@ -1,16 +1,15 @@
 import { assert } from 'chai';
 import { rm } from 'fs/promises';
 
-import { JsonHasher } from '../json-hasher';
 import { HasherFile } from './hasher-file';
-import { Variants } from '../hasher';
+import { Hasher, Variants } from '../hasher';
 
 describe('Testing "./hasher-file"', () => {
     const file = new HasherFile('./test.argon2');
     after(async () => rm(file.path));
 
     describe('salt length =  16; default config', () => {
-        const target = new JsonHasher(16);
+        const target = new Hasher(16);
 
         it('Save the file', async () => {
             await file.save(target);
@@ -28,7 +27,7 @@ describe('Testing "./hasher-file"', () => {
     });
 
     describe('salt length =  32; custom config 01', () => {
-        const target = new JsonHasher(32, {
+        const target = new Hasher(32, {
             hashLength: 64,
             memoryCost: 2048,
             parallelism: 4,
@@ -52,7 +51,7 @@ describe('Testing "./hasher-file"', () => {
     });
 
     describe('salt length =  64; custom config 02', () => {
-        const target = new JsonHasher(64, {
+        const target = new Hasher(64, {
             hashLength: 128,
             memoryCost: 1024,
             parallelism: 84,
@@ -76,7 +75,7 @@ describe('Testing "./hasher-file"', () => {
     });
 
     describe('salt length = 128; custom config 03', () => {
-        const target = new JsonHasher(128, {
+        const target = new Hasher(128, {
             hashLength: 256,
             memoryCost: 3660,
             parallelism: 4,

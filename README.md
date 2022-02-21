@@ -1,12 +1,15 @@
-# argon2-json-hasher
+# argon2-hasher
 
-Converts any JSON object into a hash, and compares their results. The library use argon2 to generate hashes.
+This is a wrapper for [Argon2](https://www.npmjs.com/package/argon2) module. With this package you can:
+- Hash `string`, `Buffer`, or any JSON object.
+- Validate hashes with an specific configuration.
+- Compare the __"deep"__ equality of 2 objects.
 
 ## Installation
 
 Simply add this project as a local dependency:
 ```bash
-$ npm i --save argon2-json-parser
+$ npm i --save argon2-hasher
 ```
 
 ## Object to Hash
