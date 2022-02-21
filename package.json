@@ -1,7 +1,7 @@
 {
   "name": "argon2-hasher",
   "version": "0.1.0",
-  "description": "A wrapper of argon2 npm package to various operations with hashing.",
+  "description": "This is a wrapper for argon2 npm module, for making mass hashing generation and comparing objects.",
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha --require ts-node/register ./src/**/*.test.ts",
@@ -10,6 +10,14 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sleep-written/argon2-hasher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sleep-written/argon2-hasher/issues"
+  },
+  "homepage": "https://github.com/sleep-written/argon2-hasher#readme",
   "keywords": [
     "argon2",
     "json",
@@ -26,5 +34,8 @@
     "mocha": "^9.2.1",
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "argon2": "^0.28.4"
   }
 }

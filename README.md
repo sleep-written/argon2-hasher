@@ -4,10 +4,11 @@ This is a wrapper for [Argon2](https://www.npmjs.com/package/argon2) module. Wit
 - Hash `string`, `Buffer`, or any JSON object.
 - Validate hashes with an specific configuration.
 - Compare the __"deep"__ equality of 2 objects.
+- Load and save your current cofiguration in a file.
 
 ## Installation
 
-Simply add this project as a local dependency:
+Simply add this project as a local dependency to your project:
 ```bash
 $ npm i --save argon2-hasher
 ```
