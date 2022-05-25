@@ -1,8 +1,8 @@
 import { access, readFile, writeFile } from 'fs/promises';
 import { resolve } from 'path';
 
-import { Hasher, Options, Variants } from '../hasher';
-import { FileNotFoundError } from './file-not-found-error';
+import { Hasher, Options, Variants } from '../hasher/index.js';
+import { FileNotFoundError } from './file-not-found-error.js';
 
 export class HasherFile {
     static load(path: string): Promise<Hasher> {

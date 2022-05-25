@@ -1,5 +1,5 @@
-import { InputTypes } from './input-types';
-import { UnsupportedTypeError } from './unsupported-type-error';
+import { InputTypes } from './input-types.js';
+import { UnsupportedTypeError } from './unsupported-type-error.js';
 
 export function getInputType(input: any): InputTypes {
     const typeofInput = typeof input

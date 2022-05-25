@@ -1,4 +1,4 @@
-import { Variants } from './variants';
+import { Variants } from './variants.js';
 
 export interface Options {
     /**

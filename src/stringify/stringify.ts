@@ -1,4 +1,4 @@
-import { getInputType } from './get-type';
+import { getInputType } from './get-input-type.js';
 
 export function stringify(input: any): string {
     switch (getInputType(input)) {

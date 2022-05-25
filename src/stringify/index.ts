@@ -1,4 +1,4 @@
-export { stringify } from './stringify';
-export { InputTypes } from './input-types';
-export { getInputType } from './get-type';
-export { UnsupportedTypeError } from './unsupported-type-error';
+export { stringify } from './stringify.js';
+export { InputTypes } from './input-types.js';
+export { getInputType } from './get-input-type.js';
+export { UnsupportedTypeError } from './unsupported-type-error.js';

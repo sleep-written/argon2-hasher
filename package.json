@@ -1,15 +1,26 @@
 {
   "name": "argon2-hasher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is a wrapper for argon2 npm module, for making mass hashing generation and comparing objects.",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "mocha --require ts-node/register ./src/**/*.test.ts",
-    "prepare": "rm -rf ./dist && tsc"
-  },
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
+  "scripts": {
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.json",
+    "prepare": "./prepare.sh && npm run build:cjs && npm run build:esm",
+    "test:cjs": "mocha --require ts-node/register './src/**/*.test.ts'",
+    "test:esm": "mocha --loader=ts-node/esm './src/**/*.test.ts'"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sleep-written/argon2-hasher.git"

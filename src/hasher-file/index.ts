@@ -1,2 +1,2 @@
-export { HasherFile } from './hasher-file';
-export { FileNotFoundError } from './file-not-found-error';
+export { HasherFile } from './hasher-file.js';
+export { FileNotFoundError } from './file-not-found-error.js';

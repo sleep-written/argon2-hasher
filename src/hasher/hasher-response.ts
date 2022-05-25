@@ -1,5 +1,5 @@
-import { Options, Variants } from './interfaces';
-import { Hashed } from './interfaces/hashed';
+import { Options, Variants } from './interfaces/index.js';
+import { Hashed } from './interfaces/hashed.js';
 
 export class HasherResponse implements Hashed {
     private _options: Options;

@@ -5,6 +5,7 @@ This is a wrapper for [Argon2](https://www.npmjs.com/package/argon2) module. Wit
 - Validate hashes with an specific configuration.
 - Compare the __"deep"__ equality of 2 objects.
 - Load and save your current cofiguration in a file.
+- Now with __CommonJS__ and __ESM Modules__ support.
 
 ## Installation
 

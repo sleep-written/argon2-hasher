@@ -1,6 +1,7 @@
 import { assert } from 'chai';
 import { randomBytes } from 'crypto';
-import { Hasher } from './hasher';
+
+import { Hasher } from './hasher.js';
 
 describe('Testing "./hasher"', () => {
     describe('Hash operations', () => {

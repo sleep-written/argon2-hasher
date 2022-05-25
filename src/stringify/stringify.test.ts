@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { stringify } from './stringify';
+import { stringify } from './stringify.js';
 
 describe('Testing "./stringify"', () => {
     describe('Convert "boolean":', () => {

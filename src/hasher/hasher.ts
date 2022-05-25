@@ -1,10 +1,10 @@
 import { hash, verify } from 'argon2';
 import { randomBytes } from 'crypto';
 
-import { Options, Hashed, Variants } from './interfaces';
-import { InvalidHashParamError } from './invalid-hash-param-error';
-import { HasherResponse } from './hasher-response';
-import { stringify } from '../stringify';
+import { Options, Hashed, Variants } from './interfaces/index.js';
+import { InvalidHashParamError } from './invalid-hash-param-error.js';
+import { HasherResponse } from './hasher-response.js';
+import { stringify } from '../stringify/index.js';
 
 export class Hasher {
     private _options: Options;

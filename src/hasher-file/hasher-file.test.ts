@@ -1,8 +1,8 @@
 import { assert } from 'chai';
 import { rm } from 'fs/promises';
 
-import { HasherFile } from './hasher-file';
-import { Hasher, Variants } from '../hasher';
+import { HasherFile } from './hasher-file.js';
+import { Hasher, Variants } from '../hasher/index.js';
 
 describe('Testing "./hasher-file"', () => {
     const file = new HasherFile('./test.argon2');

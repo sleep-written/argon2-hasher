@@ -1,3 +1,3 @@
-export { Hashed } from './hashed';
-export { Options } from './options';
-export { Variants } from './variants';
+export { Hashed } from './hashed.js';
+export { Options } from './options.js';
+export { Variants } from './variants.js';
