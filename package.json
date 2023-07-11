@@ -15,8 +15,8 @@
     }
   },
   "scripts": {
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json --sourceMap false",
+    "build:esm": "tsc -p tsconfig.json --sourceMap false",
     "prepare": "./prepare.sh && npm run build:cjs && npm run build:esm",
     "test": "ava"
   },
