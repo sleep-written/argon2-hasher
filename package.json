@@ -1,6 +1,6 @@
 {
   "name": "argon2-hasher",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This is a wrapper for argon2 npm module, for making mass hashing generation and comparing objects.",
   "type": "module",
   "main": "./dist/cjs/index.js",
